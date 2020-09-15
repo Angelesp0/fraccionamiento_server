@@ -69,7 +69,7 @@ Users.payment = (userId, result) => {
       sql.query(`SELECT * FROM fraccionamiento.payments WHERE users_id_users = ${userId} `, (err, res) => {
         console.log(res);
           if (err) reject(err)
-          resolve(res);
+          resolve(res); 
       });
   });
 };
