@@ -25,12 +25,12 @@ exports.postDivision = (req, res) => {
     }
     // Create a Customer
     const division = new Division({
-        id_division: req.body.id_division,
-        name: req.body.name,
-        street: req.body.street
+        id_division: req.query.id_division,
+        name: req.query.name,
+        street: req.query.street
     });
     // Save Customer in the database
-    Division.postDivision(division, (err, data) => {
+    Division.postDivision(division, req.query.id_users, (err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || "Algo a currido al crear la Empresa"
@@ -38,6 +38,7 @@ exports.postDivision = (req, res) => {
         else res.send(data);
     });
 };
+
 
 // Find one user by id
 exports.getUsersByDivision = (req, res) => {

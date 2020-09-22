@@ -19,17 +19,30 @@ Division.getAll = result => {
     });
 };
 
-Division.postDivision = (newDivision, result) => {
+Division.postDivision = (newDivision, id_user, result) => {
   console.log(newDivision);
     sql.query("INSERT INTO division SET ?", newDivision, (err, res) => {
+        console.log(res);
         if (err) {
             console.log("error1: ", err);
             result(err, null);
             return;
         }
+        console.log(res.insertId);
+        console.log(id_user);
+        sql.query("UPDATE users SET division_id_division = ? WHERE id_users = ?", [res.insertId, id_user], (err, res) => {
+            console.log('actualizacion de usuario');
+            console.log(res);
+            if (err) {
+                console.log("error1: ", err);
+                result(err, null);
+                return;
+            }
+            console.log("Usuario Actualizado: ", { id: res.insertId, ...newDivision });
+            result(null, { id: res.insertId, ...newDivision });
 
-        console.log("Usuario Creado: ", { id: res.insertId, ...newDivision });
-        result(null, { id: res.insertId, ...newDivision });
+        });
+
     });
 };
 
