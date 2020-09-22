@@ -18,9 +18,8 @@ async function hashPassword(password) {
 }
 
 // Create One User
-exports.create = async(req, res, next) => {
+exports.postUsers = async(req, res, next) => {
     console.log("controlador");
-    console.log('respuesta' + res, 'peticion' + req);
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -34,18 +33,14 @@ exports.create = async(req, res, next) => {
     const user = new Users({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        direction: req.body.direction,
-        colony: req.body.colony,
-        cp: req.body.cp,
+        division_id_division: req.body.division_id_division,
         role_id_role: req.body.role_id_role,
         email: req.body.email,
         password: hashedPassword
     });
     console.log(hashPassword);
-
-
     // Save Customer in the database
-    Users.create(user, (err, data) => {
+    Users.postUsers(user, (err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || "Algo a currido al crear el usuario"

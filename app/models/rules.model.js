@@ -23,5 +23,18 @@ Rules.getAll = result => {
     });
 };
 
+Rules.getRulesByDivision = (divisionId, result) => {
+    sql.query(`SELECT * FROM fraccionamiento.rules WHERE division_id_division = ${divisionId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+        result(null, res);
+        }
+    });
+};
+
 
 module.exports = Rules;

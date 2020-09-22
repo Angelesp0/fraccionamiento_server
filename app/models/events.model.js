@@ -23,5 +23,18 @@ Events.getAll = result => {
     });
 };
 
+Events.getEventsByDivision = (divisionId, result) => {
+    sql.query(`SELECT * FROM events WHERE division_id_division = ${divisionId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+        result(null, res);
+        }
+    });
+};
+
 
 module.exports = Events;

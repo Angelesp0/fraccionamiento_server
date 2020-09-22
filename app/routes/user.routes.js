@@ -5,6 +5,8 @@ module.exports = app => {
     const rules = require("../controllers/rules.controller.js");
     const events = require("../controllers/events.controller.js");
     const complaints = require("../controllers/complaints.controller.js");
+    const division = require("../controllers/division.controller.js");
+
 
 
 
@@ -16,7 +18,7 @@ module.exports = app => {
     //app.get('/users', autobus.findAll);
 
     // auth user route
-    //app.post('/auth', users.login);
+    app.post('/auth', users.login);
 
     //app.use(checkToken);
 
@@ -25,16 +27,26 @@ module.exports = app => {
 
     // Retrieve all Customers
     app.get("/users", users.findAll);
+    app.post("/users", users.postUsers);
+
+    app.get("/division", division.getAll);
+    app.post("/division", division.postDivision);
+    app.get("/division/:divisionId/users", division.getUsersByDivision);
 
     app.get("/payments/:userId", users.payments);
 
     app.get("/advertisements", advertisements.findAll);
 
     app.get("/rules", rules.findAll);
+    app.get("/rules/:divisionId", rules.getRulesByDivision)
 
     app.get("/events", events.findAll);
+    app.get("/events/:divisionId", events.getEventsByDivision);
+
 
     app.get("/complaints", complaints.findAll);
+
+
 
 
 

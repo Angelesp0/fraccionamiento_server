@@ -2,18 +2,16 @@ const sql = require("./db.js");
 const { json } = require("body-parser");
 // constructor
 const Users = function(user) {
-    this.id_user = user.id_user;
     this.first_name = user.first_name;
     this.last_name = user.last_name;
-    this.direction = user.direction;
-    this.colony = user.colony;
-    this.cp = user.cp;
-    this.role_id_role = user.role_id_role;
     this.email = user.email;
     this.password = user.password;
+    this.division_id_division= user.division_id_division;
+    this.role_id_role = user.role_id_role;
+
 };
 // Create one user
-Users.create = (newUser, result) => {
+Users.postUsers = (newUser, result) => {
     sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
         if (err) {
             console.log("error1: ", err);
@@ -69,7 +67,7 @@ Users.payment = (userId, result) => {
       sql.query(`SELECT * FROM fraccionamiento.payments WHERE users_id_users = ${userId} `, (err, res) => {
         console.log(res);
           if (err) reject(err)
-          resolve(res); 
+          resolve(res);
       });
   });
 };
