@@ -123,6 +123,20 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Retrieve all Customers from the database.
+exports.getManager = (req, res) => {
+    console.log('controldor');
+      Users.getManager((err, data) => {
+          if (err)
+              res.status(500).send({
+                  message: err.message || "Some error occurred while retrieving customers."
+              });
+          else res.send(data);
+      });
+  };
+
+
+
 exports.update = (req, res) => {
 
     // Validate Request

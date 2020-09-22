@@ -28,6 +28,8 @@ module.exports = app => {
     // Retrieve all Customers
     app.get("/users", users.findAll);
     app.post("/users", users.postUsers);
+    app.get("/users/manager", users.getManager);
+
 
     app.get("/division", division.getAll);
     app.post("/division", division.postDivision);

@@ -37,6 +37,23 @@ Users.getAll = result => {
         result(null, res);
     });
 };
+
+// Get All Users
+Users.getManager = result => {
+    console.log('modelo');
+  
+      sql.query("SELECT * FROM users WHERE role_id_role = 2", (err, res) => {
+          if (err) {
+              console.log("error: ", err);
+              result(null, err);
+              return;
+          }
+          result(null, res);
+      });
+  };
+
+
+
 // Get 1 User From ID
 Users.findById = (userId, result) => {
     sql.query(`SELECT * FROM users WHERE id_user = ${userId}`, (err, res) => {
