@@ -24,6 +24,22 @@ Users.postUsers = (newUser, result) => {
     });
 };
 
+
+// Create one user
+Users.postPayments = (newUser, result) => {
+    sql.query("INSERT INTO payments SET ?", newUser, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("Usuario Creado: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+    });
+};
+
+
 // Get All Users
 Users.getAll = result => {
   console.log('modelo');
@@ -88,6 +104,34 @@ Users.payment = (userId, result) => {
       });
   });
 };
+
+Users.getLastPayment = (userId, result) => {
+    console.log(userId);
+    return new Promise((resolve, reject) => {
+        sql.query(`SELECT * FROM fraccionamiento.payments WHERE users_id_users = ${userId} ORDER BY id_payments DESC LIMIT 1`, (err, res) => {
+          console.log(res);
+            if (err) reject(err)
+            resolve(res[0]);
+        });
+    });
+  };
+
+  Users.receipt = (img, result) => {
+    console.log("2.- Model");
+    sql.query("INSERT INTO receipt SET ?", img, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+        console.log("Archivo Creado: ", { id: res.insertId, ...img });
+        result(null, { id: res.insertId, ...img });
+    });
+}
+
+  
+
+
 
 
 Users.findByEmail = (email) => {

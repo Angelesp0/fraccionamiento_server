@@ -24,6 +24,7 @@ Events.getAll = result => {
 };
 
 Events.getEventsByDivision = (divisionId, result) => {
+    console.log(divisionId);
     sql.query(`SELECT * FROM events WHERE division_id_division = ${divisionId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);

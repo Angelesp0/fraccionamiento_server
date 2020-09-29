@@ -1,4 +1,7 @@
 const Users = require("../models/user.model.js");
+const Receipt = require("./../models/receipt.model")
+const Payment = require("../models/payment.model")
+
 const conf = require("./../config/jwt.config");
 const bcrypt = require('bcrypt');
 const jwt = require('jwt-simple');
@@ -91,6 +94,79 @@ exports.payments = async(req, res) => {
       }
 
 };
+
+
+exports.postPayments = async(req, res, next) => {
+    console.log("controlador");
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    // Create a Customer
+    const payment = new Payment({
+        description: req.body.description,
+        amount: req.body.amount,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        type: req.body.type,
+        users_id_users: req.params.userId
+    });
+    // Save Customer in the database
+    Users.postPayments(payment, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Algo a currido al crear el usuario"
+            });
+        else res.send(data);
+    });
+};
+
+
+exports.getLastPayment = async(req, res) => {
+    const user = await Users.getLastPayment(req.params.userId);
+    if (user === undefined) {
+        console.log(user);
+        res.json({
+            error: 'Error, email or password not found'
+        });
+    } else {
+        res.json(
+            user
+        )
+    }
+
+};
+
+exports.receipt = (req, res) => {
+    console.log("1.- Controlador");
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    // Create a Customer
+    const receipt = new Receipt({
+        date: req.body.date,
+        value: req.body.value,
+        url: './public',
+        file: req.file.filename,
+        payments_id_payments: req.body.payments_id_payments,
+    });
+    console.log(receipt);
+    // Save Customer in the database
+    Users.receipt(receipt, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Algo a currido al crear la Empresa"
+            });
+        else res.send(data);
+    });
+}
+
+
 
 
 

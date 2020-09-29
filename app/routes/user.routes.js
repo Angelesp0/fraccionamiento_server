@@ -7,9 +7,24 @@ module.exports = app => {
     const complaints = require("../controllers/complaints.controller.js");
     const division = require("../controllers/division.controller.js");
 
+    var multer = require('multer')
+    const path = require('path')
 
+    let storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, './public')
+        },
+        filename: (req, file, cb) => {
 
+            if (file.mimetype == 'application/pdf') {
+                console.log('hola');
+                file.fieldname = 'recibo';
+            }
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        }
+    });
 
+    const upload = multer({ storage });
 
 
     //const company = require("../controllers/companies.controller.js");
@@ -30,6 +45,10 @@ module.exports = app => {
     app.post("/users", users.postUsers);
     app.get("/users/manager", users.getManager);
     app.get("/division/:id", users.getManager);
+    ///////////////////////////////////////////////////////////////////////
+    app.post("/users/:userId/receipt", upload.single('file'), users.receipt);
+    ///////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -38,6 +57,15 @@ module.exports = app => {
     app.get("/division/:divisionId/users", division.getUsersByDivision);
 
     app.get("/payments/:userId", users.payments);
+    ////////////////////////////////////////////////////////
+    app.post("/payments/:userId", users.postPayments);
+    ///////////////////////////////////////////////////////////////////////
+
+    
+
+
+    app.get("/lastPayments/:userId", users.getLastPayment);
+
 
     app.get("/advertisements", advertisements.findAll);
 
@@ -49,6 +77,7 @@ module.exports = app => {
 
 
     app.get("/complaints", complaints.findAll);
+
 
 
 
