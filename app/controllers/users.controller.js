@@ -52,6 +52,38 @@ exports.postUsers = async(req, res, next) => {
     });
 };
 
+
+exports.activeUser = (req, res) => {
+    console.log(req.body);
+
+    // Validate Request
+    if (!req.body) {
+        res.status(400).send({
+            message: "El contenido no puede estar vacio!"
+        });
+    }
+
+    Users.activeUser(
+        req.params.id,
+        (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found Customer with id ${req.params.userId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating Customer with id " + req.params.userId
+                    });
+                }
+            } else res.send(data);
+        }
+    );
+
+};
+
+
+
 // login
 exports.login = async(request, response) => {
     console.log("1.- Controlador");
@@ -103,7 +135,7 @@ exports.postPayments = async(req, res, next) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
-    }
+    } 
     // Create a Customer
     const payment = new Payment({
         description: req.body.description,
@@ -140,6 +172,7 @@ exports.getLastPayment = async(req, res) => {
 };
 
 exports.receipt = (req, res) => {
+    console.log(req.file)
     console.log("1.- Controlador");
     // Validate request
     if (!req.body) {
@@ -198,6 +231,31 @@ exports.findAll = (req, res) => {
         else res.send(data);
     });
 };
+// Retrieve all Customers from the database.
+exports.disabledUsers = (req, res) => {
+    console.log('controldor');
+      Users.disabledUsers((err, data) => {
+          if (err)
+              res.status(500).send({
+                  message: err.message || "Some error occurred while retrieving customers."
+              });
+          else res.send(data);
+      });
+  };
+
+  exports.usersStatus = (req, res) => {
+    console.log('controldor');
+      Users.usersStatus(req.params.id, (err, data) => {
+          if (err)
+              res.status(500).send({
+                  message: err.message || "Some error occurred while retrieving customers."
+              });
+          else res.send(data);
+      });
+  };
+
+  
+
 
 // Retrieve all Customers from the database.
 exports.getManager = (req, res) => {

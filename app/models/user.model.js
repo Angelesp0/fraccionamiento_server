@@ -41,10 +41,10 @@ Users.postPayments = (newUser, result) => {
 
 
 // Get All Users
-Users.getAll = result => {
+Users.disabledUsers = result => {
   console.log('modelo');
 
-    sql.query("SELECT * FROM users", (err, res) => {
+    sql.query("SELECT * FROM users WHERE status = 'disabled'", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -53,6 +53,22 @@ Users.getAll = result => {
         result(null, res);
     });
 };
+
+// Get All Users
+Users.usersStatus = (id, result) => {
+    console.log('modelo');
+  
+      sql.query("SELECT status FROM users WHERE id_users = ?", id, (err, res) => {
+          if (err) {
+              console.log("error: ", err);
+              result(null, err);
+              return;
+          }
+          result(null, res[0]);
+      });
+  };
+
+
 
 // Get All Users
 Users.getManager = result => {
@@ -104,6 +120,30 @@ Users.payment = (userId, result) => {
       });
   });
 };
+
+
+
+Users.activeUser = (id, result) =>{
+    sql.query(
+        "UPDATE users SET status = ? WHERE id_users = ? ", ['active', id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                // not found Customer with the id
+                result({ kind: "not_found" }, null);
+                return;
+            }
+
+            console.log("updated usuario: ", { id_user: id });
+            result(null, { id_user: id});
+        }
+    );
+}
 
 Users.getLastPayment = (userId, result) => {
     console.log(userId);

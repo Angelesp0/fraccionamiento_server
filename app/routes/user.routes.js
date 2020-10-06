@@ -48,6 +48,13 @@ module.exports = app => {
     ///////////////////////////////////////////////////////////////////////
     app.post("/users/:userId/receipt", upload.single('file'), users.receipt);
     ///////////////////////////////////////////////////////////////////////
+    app.get("/disabledUsers", users.disabledUsers);
+    app.get("/usersStatus/:id", users.usersStatus);
+    app.put("/activeuser/:id", users.activeUser);
+
+
+    
+
 
 
 
@@ -77,6 +84,7 @@ module.exports = app => {
 
 
     app.get("/complaints", complaints.findAll);
+    
 
 
 
