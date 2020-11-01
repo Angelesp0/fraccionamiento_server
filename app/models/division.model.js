@@ -30,7 +30,7 @@ Division.postDivision = (newDivision, id_user, result) => {
         }
         console.log(res.insertId);
         console.log(id_user);
-        sql.query("UPDATE users SET division_id_division = ? WHERE id_users = ?", [res.insertId, id_user], (err, res) => {
+        sql.query("UPDATE users SET status = 'active' division_id_division = ? WHERE id_users = ?", [res.insertId, id_user], (err, res) => {
             console.log('actualizacion de usuario');
             console.log(res);
             if (err) {

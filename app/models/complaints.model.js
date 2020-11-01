@@ -21,5 +21,20 @@ Complaints.getAll = result => {
     });
 };
 
+// Create one user
+Complaints.postComplaints = (newUser, result) => {
+    console.log(newUser);
+    sql.query("INSERT INTO complaints SET ?", newUser, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("Aviso creado: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+    });
+};
+
 
 module.exports = Complaints;

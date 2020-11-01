@@ -1,12 +1,12 @@
 const sql = require("./db.js");
 // constructor
 const Events = function(events) {
-    this.id_events = rules.id_rules;
-    this.title = rules.title;
-    this.description = rules.description;
-    this.start = rules.start;
-    this.end = rules.end;
-    this.division_id_division = rules.division_id_division;
+    this.id_events = events.id_rules;
+    this.title = events.title;
+    this.description = events.description;
+    this.start = events.start;
+    this.end = events.end;
+    this.division_id_division = events.division_id_division;
 };
 
 
@@ -36,6 +36,23 @@ Events.getEventsByDivision = (divisionId, result) => {
         }
     });
 };
+
+// Create one user
+Events.postEvents = (newUser, result) => {
+    console.log(newUser);
+    sql.query("INSERT INTO events SET ?", newUser, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("Aviso creado: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+    });
+};
+
+
 
 
 module.exports = Events;

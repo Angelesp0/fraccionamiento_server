@@ -6,6 +6,8 @@ module.exports = app => {
     const events = require("../controllers/events.controller.js");
     const complaints = require("../controllers/complaints.controller.js");
     const division = require("../controllers/division.controller.js");
+    const employee = require("../controllers/employee.controller.js");
+
 
     var multer = require('multer')
     const path = require('path')
@@ -53,6 +55,7 @@ module.exports = app => {
     app.put("/activeuser/:id", users.activeUser);
 
 
+
     
 
 
@@ -73,17 +76,29 @@ module.exports = app => {
 
     app.get("/lastPayments/:userId", users.getLastPayment);
 
-
+    // Avisos
     app.get("/advertisements", advertisements.findAll);
+    app.get("/advertisements/:divisionId", advertisements.findById);
+    app.post("/advertisements/:divisionId", advertisements.postAdvertisements);
 
+    // Reglas
     app.get("/rules", rules.findAll);
     app.get("/rules/:divisionId", rules.getRulesByDivision)
+    app.post("/rules/:divisionId", rules.postRules);
 
+    // Eventos
     app.get("/events", events.findAll);
     app.get("/events/:divisionId", events.getEventsByDivision);
+    app.post("/events/:divisionId", events.postEvents);
 
-
+    // Quejas
     app.get("/complaints", complaints.findAll);
+    app.post("/complaints/:divisionId", complaints.postComplaints);
+    
+    // Empleados
+    app.get("/employee", employee.findAll);
+    app.get("/employee/:idEmployee/stars", employee.findStars);
+
     
 
 

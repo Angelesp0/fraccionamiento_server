@@ -23,6 +23,24 @@ Rules.getAll = result => {
     });
 };
 
+
+
+
+// Create one user
+Rules.postRules = (newUser, result) => {
+    console.log(newUser);
+    sql.query("INSERT INTO rules SET ?", newUser, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("Aviso creado: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+    });
+};
+
 Rules.getRulesByDivision = (divisionId, result) => {
     sql.query(`SELECT * FROM fraccionamiento.rules WHERE division_id_division = ${divisionId}`, (err, res) => {
         if (err) {

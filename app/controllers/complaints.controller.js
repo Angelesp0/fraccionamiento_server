@@ -12,6 +12,34 @@ exports.findAll = async(req, res) => {
         else res.send(data);
     });
     }
+ 
+
+    exports.postComplaints = async(req, res, next) => {
+        console.log("controlador Eventos");
+        // Validate request
+        if (!req.body) {
+            res.status(400).send({
+                message: "Content can not be empty!"
+            });
+        } 
+        // Create a Customer
+        const complaints = new Complaints({
+            subject: req.body.subject,
+            message: req.body.message,
+            division_id_division: req.params.divisionId
+        });
+        // Save Customer in the database
+        Complaints.postComplaints(complaints, (err, data) => {
+            if (err)
+                res.status(500).send({
+                    message: err.message || "Algo a currido al crear el usuario"
+                });
+            else res.send(data);
+        });
+    };
+    
+
+
 
 /*
 // Update Companies.

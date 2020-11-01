@@ -1,5 +1,5 @@
 module.exports = {
-    host: '192.168.2.19',
+    host: '192.168.100.80',
     user: 'frac',
     password: 'root',
     database: 'fraccionamiento',
