@@ -1,4 +1,4 @@
-const Employee = require("../models/employee.model.js");
+const Employee = require("../models/Employee.model.js");
 
 
 // Retrieve all Customers from the database.
