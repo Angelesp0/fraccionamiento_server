@@ -1,4 +1,4 @@
-const Users = require("../models/user.model.js");
+const Users = require('./../models/user.model');
 const Receipt = require("./../models/receipt.model")
 const Payment = require("../models/payment.model")
 

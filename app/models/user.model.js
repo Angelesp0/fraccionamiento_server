@@ -84,7 +84,21 @@ Users.getManager = result => {
       });
   };
 
+  // Get All Users
+Users.getAll = result => {
+    console.log('modelo');
+  
+      sql.query("SELECT * FROM users", (err, res) => {
+          if (err) {
+              console.log("error: ", err);
+              result(null, err);
+              return;
+          }
+          result(null, res);
+      });
+  };
 
+  
 
 // Get 1 User From ID
 Users.findById = (userId, result) => {

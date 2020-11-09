@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "bienvenido a globals-app" });
+    res.json({ message: "bienvenido a fraccionamiento-app" });
 });
 
 require("./app/routes/user.routes.js")(app);
