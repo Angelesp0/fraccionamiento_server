@@ -3,7 +3,7 @@ const Receipt = require("./../models/receipt.model")
 const Payment = require("../models/payment.model")
 
 const conf = require("./../config/jwt.config");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jwt-simple');
 const moment = require('moment');
 
