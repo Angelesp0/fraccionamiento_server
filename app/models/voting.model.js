@@ -4,6 +4,7 @@ const Voting = function(voting) {
     this.name = voting.name;
     this.description = voting.description;
     this.division_id_division = voting.division_id_division;
+    this.budget = voting.budget;
 };
 
 

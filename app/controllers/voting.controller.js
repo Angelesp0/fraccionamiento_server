@@ -74,7 +74,8 @@ exports.postVoting = async(req, res, next) => {
     const voting = new Voting({
         division_id_division: req.params.divisionId,
         name:  req.body.name,
-        description: req.body.description
+        description: req.body.description,
+        budget: req.body.budget
     });
     // Save Customer in the database
     Voting.postVoting(voting, (err, data) => {
