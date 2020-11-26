@@ -100,29 +100,6 @@ Users.getAll = result => {
 
   
 
-// Get 1 User From ID
-Users.findById = (userId, result) => {
-    sql.query(`SELECT * FROM users WHERE id_user = ${userId}`, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-
-        if (res.length) {
-            sql.query(`SELECT * FROM role_has_menu WHERE role_id_role = ${res[0][role_id_role]}`, (err, res) => {
-                //result(null, res[0]);
-                return;
-            });
-            //result(null, res[0]);
-            return;
-        }
-
-        // not found Customer with the id
-        result({ kind: "not_found" }, null);
-    });
-
-};
 
 Users.payment = (userId, result) => {
   console.log(userId);
@@ -134,6 +111,19 @@ Users.payment = (userId, result) => {
       });
   });
 };
+
+Users.allPayments = (divisionId, result) => {
+    console.log(divisionId);
+    return new Promise((resolve, reject) => {
+        sql.query(`SELECT id_payments, description,amount,payments.status,update_time,type,first_name,last_name,email FROM payments, users WHERE users_id_users = id_users AND division_id_division = ${divisionId} `, (err, res) => {
+          console.log(res);
+            if (err) reject(err)
+            resolve(res);
+        });
+    });
+  };
+
+
 
 
 

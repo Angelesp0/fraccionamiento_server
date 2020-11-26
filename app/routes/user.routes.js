@@ -7,6 +7,7 @@ module.exports = app => {
     const complaints = require("../controllers/complaints.controller.js");
     const division = require("../controllers/division.controller.js");
     const employee = require("../controllers/employee.controller.js");
+    const voting = require ("../controllers/voting.controller.js");
 
 
     var multer = require('multer')
@@ -70,6 +71,8 @@ module.exports = app => {
     ////////////////////////////////////////////////////////
     app.post("/payments/:userId", users.postPayments);
     ///////////////////////////////////////////////////////////////////////
+    app.get("/division/:divisionId/payments/", users.allPayments);
+
 
     
 
@@ -99,7 +102,10 @@ module.exports = app => {
     app.get("/employee", employee.findAll);
     app.get("/employee/:idEmployee/stars", employee.findStars);
 
-    
+
+    app.get("/voting/:divisionId", voting.findByDivision);
+
+    app.get("/vote/:votingId", voting.findVoteByVotingId);
 
 
 
@@ -108,9 +114,6 @@ module.exports = app => {
 
 
 
-
-    // Retrieve a single Customer with customerId
-    //app.get("/users/:userId", users.findOne);
 
     // Update a Customer with customerId
     //app.put("/users/:userId", users.update);

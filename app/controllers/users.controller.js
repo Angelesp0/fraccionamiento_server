@@ -127,6 +127,23 @@ exports.payments = async(req, res) => {
 
 };
 
+exports.allPayments = async(req, res) => {
+    const user = await Users.allPayments(req.params.divisionId);
+    if (user === undefined) {
+        console.log(user);
+        res.json({
+            error: 'Error, email or password not found'
+        });
+    } else {
+        res.json(
+            user
+        )
+    }
+
+};
+
+
+
 
 exports.postPayments = async(req, res, next) => {
     console.log("controlador");
@@ -203,22 +220,7 @@ exports.receipt = (req, res) => {
 
 
 
-// Find one user by id
-exports.findOne = (req, res) => {
-    Users.findById(req.params.userId, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                    message: `Not found Customer with id ${req.params.userId}.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Error retrieving Customer with id " + req.params.userId
-                });
-            }
-        } else res.send(data);
-    });
-};
+
 
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {
