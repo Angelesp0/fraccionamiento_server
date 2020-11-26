@@ -105,7 +105,13 @@ module.exports = app => {
 
     app.get("/voting/:divisionId", voting.findByDivision);
 
+    app.post("/voting/:divisionId", voting.postVoting);
+
+
     app.get("/vote/:votingId", voting.findVoteByVotingId);
+
+    app.post("/vote/:votingId", voting.postVote);
+
 
 
 

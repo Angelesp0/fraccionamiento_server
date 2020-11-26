@@ -7,6 +7,9 @@ const Voting = function(voting) {
 };
 
 
+
+
+
 // Get All Users
 /*
 Employee.getAll = result => {
@@ -46,7 +49,18 @@ Voting.findVoteByVotingId = (id_voting, result) => {
     });
 };
 
-
+Voting.postVoting = (newUser, result) => {
+    console.log(newUser);
+    sql.query("INSERT INTO voting SET ?", newUser, (err, res) => {
+        if (err) {
+            console.log("error1: ", err);
+            result(err, null);
+            return;
+        }
+        console.log("Voto realizado: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+    });
+};
 
 
 module.exports = Voting;
