@@ -115,7 +115,7 @@ Users.payment = (userId, result) => {
 Users.allPayments = (divisionId, result) => {
     console.log(divisionId);
     return new Promise((resolve, reject) => {
-        sql.query(`SELECT id_payments, description,amount,payments.status,update_time,type,first_name,last_name,email FROM payments, users WHERE users_id_users = id_users AND division_id_division = ${divisionId} `, (err, res) => {
+        sql.query(`SELECT id_payments, description,amount,payments.status,update_time,type,first_name,last_name,email, street, house_number FROM payments, users WHERE users_id_users = id_users AND division_id_division = ${divisionId} `, (err, res) => {
           console.log(res);
             if (err) reject(err)
             resolve(res);
