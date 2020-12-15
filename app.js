@@ -8,7 +8,7 @@ const config = require('./app/config/jwt.config');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({origin: 'http://localhost:4200'}));
 app.use(bodyParser.json());
 
 // parse requests of content-type: application/x-www-form-urlencoded
