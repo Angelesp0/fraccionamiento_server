@@ -74,7 +74,7 @@ Users.usersStatus = (id, result) => {
 Users.getManager = result => {
     console.log('modelo');
   
-      sql.query("SELECT * FROM users WHERE role_id_role = 2", (err, res) => {
+      sql.query("SELECT * FROM fraccionamiento.users WHERE role_id_role = 2", (err, res) => {
           if (err) {
               console.log("error: ", err);
               result(null, err);
