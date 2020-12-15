@@ -185,7 +185,6 @@ exports.getLastPayment = async(req, res) => {
             user
         )
     }
-
 };
 
 exports.receipt = (req, res) => {
@@ -233,6 +232,22 @@ exports.findAll = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.findById = async(req, res) => {
+    console.log('controldor');
+    const user = await Users.findById(req.params.userId);
+    if (user === undefined) {
+        console.log(user);
+        res.json({
+            error: 'Error, email or password not found'
+        });
+    } else {
+        res.json(
+            user
+        )
+    }
+  };
+
 // Retrieve all Customers from the database.
 exports.disabledUsers = (req, res) => {
     console.log('controldor');

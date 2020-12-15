@@ -45,6 +45,8 @@ module.exports = app => {
 
     // Retrieve all Customers
     app.get("/users", users.findAll);
+    app.get("/users/:userId", users.findById);
+
     app.post("/users", users.postUsers);
     app.get("/users/manager", users.getManager);
     app.get("/division/:id", users.getManager);
@@ -71,7 +73,7 @@ module.exports = app => {
     ////////////////////////////////////////////////////////
     app.post("/payments/:userId", users.postPayments);
     ///////////////////////////////////////////////////////////////////////
-    app.get("/division/:divisionId/payments/", users.allPayments);
+    app.get("/division/:divisionId/payments/", users.allPayments); 
 
 
     
@@ -102,6 +104,24 @@ module.exports = app => {
     app.get("/employee", employee.findAll);
     app.get("/employee/:idEmployee/stars", employee.findStars);
 
+    app.get("/services", employee.findServices);
+    // Busca en base a si necesita un servicio o pruducto
+    app.get("/services/need/:needId", employee.findNeed);
+
+    app.post("/services/category", employee.findByCategory);
+
+    app.post("/services/area", employee.findByArea);
+
+    app.post("/services/activity", employee.findByActivity);
+
+    // app.post("/services/order", employee.postOrder);
+
+
+
+
+
+
+
 
     app.get("/voting/:divisionId", voting.findByDivision);
 
@@ -114,9 +134,7 @@ module.exports = app => {
 
 
 
-
-
-
+    
 
 
 
