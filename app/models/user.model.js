@@ -73,15 +73,16 @@ Users.usersStatus = (id, result) => {
 // Get All Users
 Users.getManager = result => {
     console.log('modelo');
-  
       sql.query("SELECT * FROM fraccionamiento.users WHERE role_id_role = 2", (err, res) => {
           if (err) {
               console.log("error: ", err);
               result(null, err);
               return;
           }
-          result(null, res);
-      });
+          if (res.length) {
+            result(null, res);
+          }      
+        });
   };
 
   // Get All Users

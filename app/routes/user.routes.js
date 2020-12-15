@@ -49,6 +49,7 @@ module.exports = app => {
 
     app.post("/users", users.postUsers);
     app.get("/users/manager", users.getManager);
+    app.get("/division/:divisionId/users", division.getUsersByDivision);
     app.get("/division/:id", users.getManager);
     ///////////////////////////////////////////////////////////////////////
     app.post("/users/:userId/receipt", upload.single('file'), users.receipt);
@@ -67,7 +68,6 @@ module.exports = app => {
 
     app.get("/division", division.getAll);
     app.post("/divisions", division.postDivision);
-    app.get("/division/:divisionId/users", division.getUsersByDivision);
 
     app.get("/payments/:userId", users.payments);
     ////////////////////////////////////////////////////////
