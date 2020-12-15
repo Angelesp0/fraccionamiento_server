@@ -8,7 +8,18 @@ const config = require('./app/config/jwt.config');
 
 const app = express();
 
-app.use(cors())
+var whitelist = ['http://localhost:4200', 'http://fraccionamiento.herokuapp.com']
+var corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }
+
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 
 // parse requests of content-type: application/x-www-form-urlencoded
