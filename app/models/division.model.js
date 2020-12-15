@@ -9,7 +9,7 @@ const Division = function(division) {
 // Get All Users
 Division.getAll = result => {
   console.log('modelo');
-    sql.query("SELECT * FROM division", (err, res) => {
+    sql.query("SELECT * FROM fraccionamiento.division", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -47,7 +47,7 @@ Division.postDivision = (newDivision, id_user, result) => {
 };
 
 Division.getUsersByDivision = (divisionId, result) => {
-    sql.query(`SELECT * FROM users WHERE division_id_division = ${divisionId}`, (err, res) => {
+    sql.query(`SELECT * FROM fraccionamiento.users WHERE division_id_division = ${divisionId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
