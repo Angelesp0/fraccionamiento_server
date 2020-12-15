@@ -1,14 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sql = require('./app/models/db.js');
-var cors = require('cors');
+var cors = require('cors')
 const path = require('path');
 const session = require('express-session');
 const config = require('./app/config/jwt.config');
 
 const app = express();
 
-app.use(cors({origin: '*'}));
+app.use(cors())
 app.use(bodyParser.json());
 
 // parse requests of content-type: application/x-www-form-urlencoded
