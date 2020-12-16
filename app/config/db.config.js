@@ -3,7 +3,8 @@ module.exports = {
     user: 'angelesp0',
     password: 'Megamanzero123$',
     database: 'fraccionamiento',
-    port: 3306 
+    port: 3306
+    // aplicacion en local //
    /* host: '192.168.100.80',
     user: 'frac',
     password: 'root',
