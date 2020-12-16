@@ -8,6 +8,7 @@ module.exports = app => {
     const division = require("../controllers/division.controller.js");
     const employee = require("../controllers/employee.controller.js");
     const voting = require ("../controllers/voting.controller.js");
+    const orders = require ("../controllers/orders.controller.js");
 
 
     var multer = require('multer')
@@ -104,33 +105,24 @@ module.exports = app => {
     app.get("/employee", employee.findAll);
     app.get("/employee/:idEmployee/stars", employee.findStars);
 
+    // Servicios
     app.get("/services", employee.findServices);
     // Busca en base a si necesita un servicio o pruducto
     app.get("/services/need/:needId", employee.findNeed);
-
     app.post("/services/category", employee.findByCategory);
-
     app.post("/services/area", employee.findByArea);
-
     app.post("/services/activity", employee.findByActivity);
-
     // app.post("/services/order", employee.postOrder);
 
 
-
-
-
-
-
-
+    // Votaciones
     app.get("/voting/:divisionId", voting.findByDivision);
-
     app.post("/voting/:divisionId", voting.postVoting);
-
-
     app.get("/vote/:votingId", voting.findVoteByVotingId);
-
     app.post("/vote/:votingId", voting.postVote);
+
+    // Ordenes
+    app.post("/orders/:userId", orders.postOrder);
 
 
 
