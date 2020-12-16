@@ -22,15 +22,15 @@ const Orders = function(order) {
 
 
 Orders.postOrder = (new_Order, result) => {
-    console.log(newUser);
+    console.log(new_Order);
     sql.query("INSERT INTO fraccionamiento.orders SET ?", new_Order, (err, res) => {
         if (err) {
             console.log("error1: ", err);
             result(err, null);
             return;
         }
-        console.log("Voto realizado: ", { id: res.insertId, ...newUser });
-        result(null, { id: res.insertId, ...newUser });
+        console.log("Voto realizado: ", { id: res.insertId, ...new_Order });
+        result(null, { id: res.insertId, ...new_Order });
     });
 };
 
