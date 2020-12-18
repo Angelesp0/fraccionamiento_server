@@ -8,6 +8,10 @@ const config = require('./app/config/jwt.config');
 
 const app = express();
 
+
+
+
+
 app.use(cors());
 app.use(bodyParser.json());
 

@@ -9,6 +9,8 @@ module.exports = app => {
     const employee = require("../controllers/employee.controller.js");
     const voting = require ("../controllers/voting.controller.js");
     const orders = require ("../controllers/orders.controller.js");
+    var cors = require('cors');
+    app.use(cors());
 
 
     var multer = require('multer')
