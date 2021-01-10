@@ -36,6 +36,19 @@ const Orders = require("../models/orders.model.js");
     }
 };*/
 
+
+// Retrieve all Customers from the database.
+exports.getOrders = async(req, res) => {
+    console.log('controldor');
+    Orders.getOrders((err, data) => {
+          if (err)
+              res.status(500).send({
+                  message: err.message || "Some error occurred while retrieving customers."
+              });
+          else res.send(data);
+      });
+  }
+
 exports.postOrder = async(req, res, next) => {
     console.log("controlador");
     // Validate request

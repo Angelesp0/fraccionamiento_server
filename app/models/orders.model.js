@@ -34,5 +34,20 @@ Orders.postOrder = (new_Order, result) => {
     });
 };
 
+// Get All Users
+Employee.getOrders = result => {
+    console.log('modelo');
+      sql.query("SELECT * FROM fraccionamiento.orders, fraccionamiento.users where users_id_users = id_users", (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        } 
+        result(null, res);
+    });
+};
+
+
+
 
 module.exports = Orders;

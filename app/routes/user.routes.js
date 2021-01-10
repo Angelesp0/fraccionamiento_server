@@ -124,6 +124,7 @@ module.exports = app => {
     app.post("/vote/:votingId", voting.postVote);
 
     // Ordenes
+    app.get("/orders", orders.getOrders);
     app.post("/orders/:userId", orders.postOrder);
 
 
