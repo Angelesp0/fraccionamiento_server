@@ -34,6 +34,29 @@ Orders.postOrder = (new_Order, result) => {
     });
 };
 
+
+Orders.putOrders = (id, id_employee, result) =>{
+    sql.query(
+        "UPDATE fraccionamiento.orders SET employee_id_employee = ? WHERE id_orders = ?", [id_employee, id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                // not found Customer with the id
+                result({ kind: "not_found" }, null);
+                return;
+            }
+            result(null, { id_order: id});
+        }
+    );
+}
+
+
+
 // Get All Users
 Orders.getOrders = result => {
     console.log('modelo');

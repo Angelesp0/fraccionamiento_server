@@ -86,6 +86,35 @@ exports.postOrder = async(req, res, next) => {
 };
 
 
+exports.putOrders = (req, res) => {
+    // Validate Request
+    if (!req.body) {
+        res.status(400).send({
+            message: "El contenido no puede estar vacio!"
+        });
+    }
+    Orders.putOrders(
+        req.params.orderId,
+        req.body.id_employee,
+        (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found Customer with id ${req.params.userId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating Customer with id " + req.params.userId
+                    });
+                }
+            } else res.send(data);
+        }
+    );
+
+};
+
+
+
 
 
 
