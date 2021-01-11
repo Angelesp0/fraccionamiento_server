@@ -37,7 +37,7 @@ Orders.postOrder = (new_Order, result) => {
 
 Orders.putOrders = (id, id_employee, result) =>{
     sql.query(
-        "UPDATE fraccionamiento.orders SET employee_id_employee = ? , status= 'en proceso' WHERE id_orders = ?", [id_employee, id],
+        "UPDATE fraccionamiento.orders SET employee_id_employee = ? , status= 'En proceso' WHERE id_orders = ?", [id_employee, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
