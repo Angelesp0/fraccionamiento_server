@@ -47,7 +47,23 @@ exports.getOrders = async(req, res) => {
               });
           else res.send(data);
       });
-  }
+}
+
+
+exports.getOrdersByUserId = async(req, res) => {
+    console.log('controldor');
+    Orders.getOrdersByUserId( 
+        req.params.userId,
+        (err, data) => {
+          if (err)
+              res.status(500).send({
+                  message: err.message || "Some error occurred while retrieving customers."
+              });
+          else res.send(data);
+      });
+}
+
+
 
 exports.postOrder = async(req, res, next) => {
     console.log("controlador");

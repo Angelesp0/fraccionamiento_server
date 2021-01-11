@@ -71,6 +71,19 @@ Orders.getOrders = result => {
     });
 };
 
+Orders.getOrdersByUserId = (id, result) => {
+    console.log('modelo');
+      sql.query("SELECT * FROM fraccionamiento.orders WHERE users_id_users = ?", id, (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        } 
+        result(null, res);
+    });
+};
+
+
 
 
 
