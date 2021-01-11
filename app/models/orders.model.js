@@ -73,7 +73,7 @@ Orders.getOrders = result => {
 
 Orders.getOrdersByUserId = (id, result) => {
     console.log('modelo');
-      sql.query("SELECT * FROM fraccionamiento.orders fraccionamiento.employee WHERE users_id_users = ? AND id_employee = employee_id_employee", id, (err, res) => {
+      sql.query("SELECT * FROM fraccionamiento.orders, fraccionamiento.employee WHERE users_id_users = ? AND id_employee = employee_id_employee", id, (err, res) => {
           if (err) {
             console.log("error: ", err);
             result(null, err);
