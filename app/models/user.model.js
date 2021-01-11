@@ -116,7 +116,7 @@ Users.payment = (userId, result) => {
 Users.findById = (userId, result) => {
     console.log(userId);
     return new Promise((resolve, reject) => {
-        sql.query(`SELECT id_users, first_name, last_name, email, password, status, role_id_role, users.street, house_number, name FROM fraccionamiento.users, division  WHERE id_users = ${userId} And division_id_division = id_division`, (err, res) => {
+        sql.query(`SELECT id_users, first_name, last_name, email, password, status, role_id_role, users.street, house_number, name FROM fraccionamiento.users, fraccionamiento.division WHERE id_users = ${userId} And division_id_division = id_division`, (err, res) => {
           console.log(res);
             if (err) reject(err)
             resolve(res[0]);
