@@ -126,8 +126,7 @@ module.exports = app => {
     // Ordenes
     app.get("/orders", orders.getOrders);
     app.post("/orders/:userId", orders.postOrder);
-    app.get("/orders/editEmployee/:orderId", orders.putOrders);
-
+    app.put("/orders/editEmployee/:orderId", orders.putOrders);
 
 
 
