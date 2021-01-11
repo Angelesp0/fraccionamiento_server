@@ -37,7 +37,7 @@ Orders.postOrder = (new_Order, result) => {
 // Get All Users
 Orders.getOrders = result => {
     console.log('modelo');
-      sql.query("SELECT * FROM fraccionamiento.orders, fraccionamiento.users where users_id_users = id_users", (err, res) => {
+      sql.query("SELECT * FROM fraccionamiento.orders, fraccionamiento.users, fraccionamiento.employee where users_id_users = id_users AND id_employee = employee_id_employee", (err, res) => {
           if (err) {
             console.log("error: ", err);
             result(null, err);
