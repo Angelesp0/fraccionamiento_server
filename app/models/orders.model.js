@@ -61,7 +61,7 @@ Orders.putOrders = (id, id_employee, result) =>{
 Orders.getOrders = result => {
     console.log('modelo');
     /*      sql.query("SELECT * FROM fraccionamiento.orders, fraccionamiento.users, fraccionamiento.employee where users_id_users = id_users AND id_employee = employee_id_employee", (err, res) => {*/
-      sql.query("SELECT id_orders, users_id_users, address, status, phone, contact, hour, date, services, description, employee.first_name, employee.last_name, id_employee, img FROM fraccionamiento.orders, fraccionamiento.users, fraccionamiento.employee where users_id_users = id_users AND id_employee = employee_id_employee", (err, res) => {
+      sql.query("SELECT id_orders, users_id_users, address, orders.status, phone, contact, hour, date, services, description, employee.first_name, employee.last_name, id_employee, img FROM fraccionamiento.orders, fraccionamiento.users, fraccionamiento.employee where users_id_users = id_users AND id_employee = employee_id_employee", (err, res) => {
           if (err) {
             console.log("error: ", err);
             result(null, err);
